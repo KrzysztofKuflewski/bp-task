@@ -6,7 +6,7 @@
             <h3>New Application</h3>
 
             <form id="create-application-form" method="post" action="{{ route('applications.store') }}"
-                  enctype="multipart/form-data" novalidate>
+                  enctype="multipart/form-data">
 
                 {{csrf_field()}}
 
