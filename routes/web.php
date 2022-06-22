@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\AttachmentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [ApplicationsController::class, 'create'])->name('applications.create');
+Route::post('/applications', [ApplicationsController::class, 'store'])->name('applications.store');
+
+Route::group(['middleware' => 'auth.basic'], function(){
+    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications.index');
+    Route::get('/attachments/serve/{id}', [AttachmentsController::class, 'serve'])->name('attachments.serve');
 });
+
